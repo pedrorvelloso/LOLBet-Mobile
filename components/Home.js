@@ -1,13 +1,9 @@
 import React from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight, ScrollView, Image } from 'react-native';
 import styles from './Styles';
 import Pubsub from 'pubsub-js';
 
 export default class Home extends React.Component {
-
-    componentDidMount() {
-        console.log(this.props);
-    }
 
     _sair() {
         Pubsub.publish('logout', undefined);
@@ -15,7 +11,19 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+                <View style={[{height: 75}, styles.blue]}><Text style={styles.topText}>Selecione uma Liga</Text></View>
+                <ScrollView style={{backgroundColor: '#4f9bb7'}} />
+                <View style={[{height: 60,}, styles.default]}>
+                    <Image source={require('../quit.png')} style={{left: 10, top: 20}} />
+                    <Text>Sair</Text>
+                </View>
+              </View>
+            /*<View style={styles.container}>
                 <Text>Logado como {this.props.user.user}</Text>
                 <TouchableHighlight
                     style={[styles.button, styles.red]}
@@ -23,7 +31,7 @@ export default class Home extends React.Component {
                 >
                     <Text style={styles.text}>Sair</Text>
                 </TouchableHighlight>
-            </View>
+            </View>*/
         );
     }
 }

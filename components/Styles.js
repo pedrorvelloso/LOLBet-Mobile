@@ -18,13 +18,13 @@ module.exports = StyleSheet.create({
     borderRadius: 10,
     width: 230,
   },
-  buttonBox : {
+  buttonBox: {
     margin: 5,
     padding: 20,
     borderRadius: 25,
     width: 230,
   },
-  blue : {
+  blue: {
     backgroundColor: '#41cdf4'
   },
   red: {
@@ -42,10 +42,10 @@ module.exports = StyleSheet.create({
   box: {
     width: 350
   },
-  boxTitle : {
+  boxTitle: {
     color: '#ffffff',
     fontSize: 20
-  }, 
+  },
   boxBottom: {
     backgroundColor: '#ffffff',
     borderBottomLeftRadius: 10,
@@ -59,5 +59,12 @@ module.exports = StyleSheet.create({
     borderTopRightRadius: 10,
     padding: 20,
     alignItems: 'center',
-  }    
+  },
+  //Pages
+  topText: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 35,
+    color: '#fff'
+  }
 });

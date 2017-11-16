@@ -41,15 +41,16 @@ export default class Login extends React.Component {
     }
 
     _login() {
-        let body = { username: this.state.username, password: this.state.senha }
+        //let body = { username: this.state.username, password: this.state.senha }
+        let body = { username: 'ilher', password: '123' }
 
         let requestInfo = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         }
-
-        fetch(`${Constants.API_URL}/login/mobile`, requestInfo)
+        Pubsub.publish('login', {user: 'Ilher'});
+        /*fetch(`${Constants.API_URL}/login/mobile`, requestInfo)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -61,7 +62,7 @@ export default class Login extends React.Component {
                 Pubsub.publish('login', user);
             }).catch(error => {
                 Alert.alert("Erro ao realizar login!")
-            });
+            });*/
     }
 
     render() {

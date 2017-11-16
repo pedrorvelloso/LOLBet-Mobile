@@ -26,7 +26,9 @@ export default class Entrar extends React.Component {
             body: JSON.stringify(body)
         }
 
-        fetch(`${Constants.API_URL}/login/mobile`, requestInfo)
+        Pubsub.publish('login', {user: 'Ilher'});
+
+        /*fetch(`${Constants.API_URL}/login/mobile`, requestInfo)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -38,7 +40,11 @@ export default class Entrar extends React.Component {
             Pubsub.publish('login', user);
         }).catch(error => {
             Alert.alert("Erro ao realizar login!")
-        });
+        });*/
+    }
+
+    teste () {
+        Pubsub.publish('login', {user: 'Ilher'});
     }
 
 
@@ -64,7 +70,7 @@ export default class Entrar extends React.Component {
                     />
                     <TouchableHighlight
                         style={[styles.buttonBox, styles.blue]}
-                        onPress={this._login.bind(this)}>
+                        onPress={this.teste.bind(this)}>
                         <Text style={styles.text}>Entrar</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
@@ -72,7 +78,7 @@ export default class Entrar extends React.Component {
                         onPress={() => {
                             this.setModalVisible(false)
                         }}>
-                        <Text style={styles.text}>Cancelar</Text>
+                        <Text style={styles.text}>Cancela</Text>
                     </TouchableHighlight>
 
 

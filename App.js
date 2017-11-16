@@ -24,7 +24,8 @@ export default class App extends React.Component {
 
   render() {
     return (
-      this.state.user === undefined ? <Login/> : <Home user={this.state.user} />
+      //this.state.user === undefined ? <Login/> : <Home user={this.state.user} />
+      <Home user={this.state.user} />
     );
   }
 }
