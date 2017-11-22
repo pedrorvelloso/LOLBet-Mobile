@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 module.exports = StyleSheet.create({
   container: {
@@ -66,5 +66,47 @@ module.exports = StyleSheet.create({
     fontSize: 20,
     marginTop: 35,
     color: '#fff'
+  },
+  center: {
+    justifyContent: 'center'
+  },
+  scrollContainer: {
+    flex: 1,
+    backgroundColor: '#4f9bb7'
+  },
+  scontainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 2,
+    marginTop: 5
+  },
+  boxHome: {
+    margin: 4,
+    width: Dimensions.get('window').width / 2 - 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'blue',
+    padding: 30,
+    backgroundColor: '#a2bac3',
+    borderWidth: 2,
+    borderColor: '#abc8d3',
+    borderRadius: 5
+  },
+  imgLeague: {
+    height: 150,
+  },
+  imgTeams: {
+    height: 100,
+  },
+  boxJogos: {
+    margin: 4,
+    width: Dimensions.get('window').width - 11,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#a2bac3',
+    borderWidth: 2,
+    borderColor: '#abc8d3',
+    borderRadius: 5
   }
 });

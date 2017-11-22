@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Button, Image, Modal, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Button, Image, Modal, TextInput, Alert, AsyncStorage } from 'react-native';
 
 import styles from './Styles';
 
@@ -11,7 +11,7 @@ export default class Login extends React.Component {
 
     constructor() {
         super();
-        this.state = { pressEntrarStatus: false, pressRegisterStatus: false, modalVisible: false };
+        this.state = { pressEntrarStatus: false, pressRegisterStatus: false, modalVisible: false, username: '', password: '' };
     }
 
     componentDidMount() {
@@ -41,16 +41,15 @@ export default class Login extends React.Component {
     }
 
     _login() {
-        //let body = { username: this.state.username, password: this.state.senha }
-        let body = { username: 'ilher', password: '123' }
+        let body = { username: this.state.username, password: this.state.senha }
 
         let requestInfo = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         }
-        Pubsub.publish('login', {user: 'Ilher'});
-        /*fetch(`${Constants.API_URL}/login/mobile`, requestInfo)
+        
+        fetch(`${Constants.API_URL}/login/`, requestInfo)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -59,10 +58,15 @@ export default class Login extends React.Component {
                 }
             })
             .then(user => {
-                Pubsub.publish('login', user);
+                Pubsub.publish('login', {user: 'Ilher'});
+                try {
+                    AsyncStorage.setItem('user', JSON.stringify(user));
+                  } catch (error) {
+                    // Error saving data
+                  }
             }).catch(error => {
                 Alert.alert("Erro ao realizar login!")
-            });*/
+            });
     }
 
     render() {
