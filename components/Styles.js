@@ -79,7 +79,7 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     padding: 2,
-    marginTop: 5
+    marginTop: 5,
   },
   boxHome: {
     margin: 4,
@@ -108,5 +108,41 @@ module.exports = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#abc8d3',
     borderRadius: 5
-  }
+  },
+  // APOSTA
+  containerAposta: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 2,
+  },
+  apostaTitle: {
+    padding: 15,
+    color: '#FFF',
+  },
+  boxHomes: {
+    margin: 4,
+    alignItems: 'center',
+    width: Dimensions.get('window').width - 11,
+    backgroundColor: 'blue',
+    backgroundColor: '#a2bac3',
+    borderWidth: 2,
+    borderColor: '#abc8d3',
+    borderRadius: 5
+  },
+  boxJogo: {
+    color: '#FFF'
+  },
+  aposta: {
+    backgroundColor: '#4f9bb7'
+  },
+  imgTeam: {
+    height: 150,
+    width: Dimensions.get('window').width - 11,
+  },
+  buttonAposta: {
+    margin: 4,
+    padding: 20,
+    borderRadius: 10,
+    width: Dimensions.get('window').width - 10,
+  },
 });

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 import Home from './Home';
 import Jogos from './Jogos';
+import Aposta from './Aposta';
 
 const navigationConfig = {
     initialRouteName: 'Home',
@@ -20,17 +21,22 @@ const RootNavigator = StackNavigator({
             headerTitle: 'Selecione uma Liga',
             headerBackTitle: ' '
         },
-        header: ({ state, setParams }) => ({
-            style: { backgroundColor: 'green' }
-        })
     },
     Jogos: {
         path: 'ligas/:id',
         screen: Jogos,
         navigationOptions: {
             headerTitle: 'Jogos',
+            headerBackTitle: ' '
         },
-    }
+    },
+    Aposta: {
+        screen: Aposta,
+        navigationOptions: {
+            headerTitle: 'Fazer sua aposta',
+            headerBackTitle: ' '
+        },
+    },
 }, navigationConfig);
 
 export default RootNavigator;

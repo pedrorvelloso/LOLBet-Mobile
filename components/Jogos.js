@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableHighlight, ScrollView, Image, Button, AsyncStorage } from 'react-native';
 import styles from './Styles';
-import Pubsub from 'pubsub-js';
 
 import Constants from '../utils/Constants';
 import Teams from '../utils/Teams';
@@ -39,10 +38,10 @@ export default class Jogos extends React.Component {
 
                 <ScrollView style={styles.scrollContainer}>
                     <View style={styles.scontainer}>
-                        {this.state.jogos.map(time => {
-                            let imgName = Teams[time.participant1.toLowerCase().replace(/\s/g, '').replace('-', '')];
-                            let imgName2 = Teams[time.participant2.toLowerCase().replace(/\s/g, '').replace('-', '')];
-                            return <View key={time.id} style={styles.boxJogos}><TouchableHighlight><Image resizeMode="contain" source={imgName} style={styles.imgTeams} /></TouchableHighlight><Text>vs</Text><TouchableHighlight><Image resizeMode="contain" source={imgName2} style={styles.imgTeams} /></TouchableHighlight></View>
+                        {this.state.jogos.map(jogo => {
+                            let imgName = Teams[jogo.participant1.toLowerCase().replace(/\s/g, '').replace('-', '')];
+                            let imgName2 = Teams[jogo.participant2.toLowerCase().replace(/\s/g, '').replace('-', '')];
+                            return <TouchableHighlight key={jogo.id} onPress={() => this.props.navigation.navigate('Aposta', jogo)}><View style={styles.boxJogos}><Image resizeMode="contain" source={imgName} style={styles.imgTeams} /><Text>vs</Text><Image resizeMode="contain" source={imgName2} style={styles.imgTeams} /></View></TouchableHighlight>
                         }
                         )}
                     </View>
