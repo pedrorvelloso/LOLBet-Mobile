@@ -129,6 +129,16 @@ module.exports = StyleSheet.create({
     borderColor: '#abc8d3',
     borderRadius: 5
   },
+  boxHomesSelecionado: {
+    margin: 4,
+    alignItems: 'center',
+    width: Dimensions.get('window').width - 11,
+    backgroundColor: 'blue',
+    backgroundColor: '#9ed3a9',
+    borderWidth: 2,
+    borderColor: '#62c977',
+    borderRadius: 5
+  },
   boxJogo: {
     color: '#FFF'
   },

@@ -51,7 +51,7 @@ export default class Home extends React.Component {
                         </View>
                         : <Text>Carregandos...</Text>}
                 </ScrollView>
-                <Footer />
+                
             </View>
         );
     }
