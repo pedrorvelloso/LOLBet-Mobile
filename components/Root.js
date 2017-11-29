@@ -5,8 +5,9 @@ import Home from './Home';
 import Main from './Main';
 import Jogos from './Jogos';
 import Aposta from './Aposta';
+import Bets from './Bets';
 
-import Teste from './Teste';
+import Perfil from './Perfil';
 
 const navigationConfig = {
     initialRouteName: 'HomeScreen',
@@ -22,41 +23,54 @@ export const RootTabs = TabNavigator({
     Home: {
         screen: Home,
         navigationOptions: {
-          tabBarLabel: 'Listar Ligas',
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Ionicons
-              name={focused ? 'ios-list-box' : 'ios-list-box-outline'}
-              size={26}
-              style={{ color: tintColor }}
-            />
-          ),
+            tabBarLabel: 'Listar Ligas',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Ionicons
+                    name={focused ? 'ios-list-box' : 'ios-list-box-outline'}
+                    size={26}
+                    style={{ color: tintColor }}
+                />
+            ),
         },
-      },
+    },
+    Bets: {
+        screen: Bets,
+        navigationOptions: {
+            tabBarLabel: 'Apostas',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Ionicons
+                    name={focused ? 'ios-cash' : 'ios-cash-outline'}
+                    size={26}
+                    style={{ color: tintColor }}
+                />
+            ),
+        },
+    },
     Settings: {
-      screen: Teste,
-      navigationOptions: {
-        tabBarLabel: 'Opções',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-person' : 'ios-person-outline'}
-            size={26}
-            style={{ color: tintColor }}
-          />
-        ),
-      },
+        screen: Perfil,
+        navigationOptions: {
+            tabBarLabel: 'Perfil',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Ionicons
+                    name={focused ? 'ios-person' : 'ios-person-outline'}
+                    size={26}
+                    style={{ color: tintColor }}
+                />
+            ),
+        },
     },
-  },  {
-    tabBarPosition: 'bottom',
-    animationEnabled: true,
-    tabBarOptions: {
-      activeTintColor: '#fff',
-      style: {
-          backgroundColor: '#585374',
-          paddingBottom: 2,
-          height: 50
-      }
-    },
-  });
+}, {
+        tabBarPosition: 'bottom',
+        animationEnabled: true,
+        tabBarOptions: {
+            activeTintColor: '#fff',
+            style: {
+                backgroundColor: '#585374',
+                paddingBottom: 2,
+                height: 50
+            }
+        },
+    });
 
 export const RootNavigator = StackNavigator({
     HomeScreen: {

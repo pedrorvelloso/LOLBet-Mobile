@@ -10,7 +10,7 @@ export default class Jogos extends React.Component {
 
     constructor() {
         super();
-        this.state = { jogos: [] }
+        this.state = { jogos: [], error: '' }
     }
 
     componentDidMount() {
@@ -20,12 +20,15 @@ export default class Jogos extends React.Component {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error("Erro!");
+                    throw new Error("Nenhuma partida!");
                 }
             })
             .then(jogos => {
                 this.setState({ jogos });
-            });
+            })
+            .catch(err => {
+                this.setState({error : err.message});
+            })
     }
 
     render() {
@@ -37,6 +40,7 @@ export default class Jogos extends React.Component {
             }}>
 
                 <ScrollView style={styles.scrollContainer}>
+                {this.state.error ? <Text style={styles.apostaTitle}>{this.state.error}</Text> : <View></View>}
                     <View style={styles.scontainer}>
                         {this.state.jogos.map(jogo => {
                             let imgName = Teams[jogo.participant1.toLowerCase().replace(/\s/g, '').replace('-', '')];

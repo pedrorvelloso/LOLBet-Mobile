@@ -155,4 +155,43 @@ module.exports = StyleSheet.create({
     borderRadius: 10,
     width: Dimensions.get('window').width - 10,
   },
+  //PERFIL
+  boxPerfil: {
+    margin: 4,
+    width: Dimensions.get('window').width - 11,
+    backgroundColor: '#a2bac3',
+    borderWidth: 2,
+    borderColor: '#abc8d3',
+    borderRadius: 5
+  },
+  boxAdcionarSaldo: {
+    margin: 4,
+    width: Dimensions.get('window').width - 11,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#eee',
+    borderRadius: 5,
+    padding: 100
+  },
+  perfil: {
+    fontSize: 20,
+    marginTop: 15,
+    color: 'white',
+  },
+  buttonPerfil: {
+    margin: 10,
+    padding: 20,
+    borderRadius: 10,
+  },
+  //Aposta tab
+  boxApostas: {
+    margin: 4,
+    width: Dimensions.get('window').width - 11,
+    backgroundColor: '#a2bac3',
+    borderWidth: 2,
+    borderColor: '#abc8d3',
+    borderRadius: 5
+  },
 });

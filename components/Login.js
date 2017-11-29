@@ -11,7 +11,7 @@ export default class Login extends React.Component {
 
     constructor() {
         super();
-        this.state = { pressEntrarStatus: false, pressRegisterStatus: false, modalVisible: false, username: '', password: '' };
+        this.state = { pressEntrarStatus: false, pressRegisterStatus: false, modalVisible: false, modalVisibleRegister: false, username: '', password: '', user: '', cpf: '', eMail: '', cellphone: '' };
     }
 
     componentDidMount() {
@@ -33,11 +33,15 @@ export default class Login extends React.Component {
     }
 
     _onShowUnderlayRegister() {
-        this.setState({ pressRegisterStatus: true });
+        this.setState({ pressRegisterStatus: true, modalVisibleRegister: true });
     }
 
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
+    }
+
+    setModalVisibleRegister(visible) {
+        this.setState({ modalVisibleRegister: visible });
     }
 
     _login() {
@@ -48,8 +52,8 @@ export default class Login extends React.Component {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         }
-        
-        fetch(`${Constants.API_URL}/login/`, requestInfo)
+
+        fetch(`${Constants.API_URL}/login/mobile`, requestInfo)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -58,15 +62,69 @@ export default class Login extends React.Component {
                 }
             })
             .then(user => {
-                Pubsub.publish('login', {user: 'Ilher'});
+                Pubsub.publish('login', { user: 'Ilher' });
                 try {
                     AsyncStorage.setItem('user', JSON.stringify(user));
-                  } catch (error) {
+                } catch (error) {
                     // Error saving data
-                  }
+                }
             }).catch(error => {
                 Alert.alert("Erro ao realizar login!")
             });
+    }
+
+    _cadastrar() {
+        let body = {
+            username: this.state.username,
+            user: this.state.user,
+            password: this.state.senha,
+            cpf: this.state.cpf,
+            eMail: this.state.eMail,
+            cellphone: this.state.cellphone,
+            cod_role: '2'
+        }
+
+        let requestInfo = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        }
+
+        fetch(`${Constants.API_URL}/user/inserir/`, requestInfo)
+            .then(response => {
+                if (response.ok) {
+                    let bodyLogin = { username: this.state.username, password: this.state.senha }
+
+                    let requestInfoLogin = {
+                        method: 'POST',
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(bodyLogin)
+                    }
+                    fetch(`${Constants.API_URL}/login/mobile`, requestInfoLogin)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                throw new Error("Erro!");
+                            }
+                        })
+                        .then(user => {
+                            Pubsub.publish('login', { user: 'Ilher' });
+                            try {
+                                AsyncStorage.setItem('user', JSON.stringify(user));
+                            } catch (error) {
+                                // Error saving data
+                            }
+                        }).catch(error => {
+                            Alert.alert("Erro ao realizar login!")
+                        });
+                } else {
+                    throw new Error("Erro ao cadastrar usuário! Verifique os campos.")
+                }
+            }).catch(err => {
+                Alert.alert(err.message)
+            })
+
     }
 
     render() {
@@ -118,6 +176,79 @@ export default class Login extends React.Component {
                     </View>
                 </Modal>
 
+                <Modal
+                    animationType="fade"
+                    transparent={false}
+                    visible={this.state.modalVisibleRegister}
+                    onRequestClose={this.setModalVisibleRegister.bind(this, false)}
+                >
+                    <View style={styles.container}>
+                        <View style={styles.box}>
+                            <View style={styles.boxTop}>
+                                <Text style={styles.boxTitle}>Realizar Cadastro</Text>
+                            </View>
+                            <View style={styles.boxBottom}>
+                                <TextInput
+                                    style={{ height: 50, width: 200 }}
+                                    placeholder="Nome"
+                                    onChangeText={(user) => this.setState({ user })}
+                                    autoCorrect={false}
+                                />
+                                <Text></Text>
+                                <TextInput
+                                    style={{ height: 50, width: 200 }}
+                                    placeholder="Usuário"
+                                    onChangeText={(username) => this.setState({ username })}
+                                    autoCorrect={false}
+                                />
+                                <Text></Text>
+                                <TextInput
+                                    style={{ height: 50, width: 200 }}
+                                    placeholder="Email"
+                                    onChangeText={(eMail) => this.setState({ eMail })}
+                                    autoCorrect={false}
+                                />
+                                <Text></Text>
+                                <TextInput
+                                    style={{ height: 50, width: 200 }}
+                                    placeholder="Celular"
+                                    onChangeText={(cellphone) => this.setState({ cellphone })}
+                                    autoCorrect={false}
+                                />
+                                <Text></Text>
+                                <TextInput
+                                    style={{ height: 50, width: 200 }}
+                                    placeholder="CPF"
+                                    onChangeText={(cpf) => this.setState({ cpf })}
+                                    autoCorrect={false}
+                                />
+                                <Text></Text>
+                                <TextInput
+                                    style={{ height: 50, width: 200 }}
+                                    placeholder="Senha"
+                                    onChangeText={(senha) => this.setState({ senha })}
+                                    secureTextEntry={true}
+                                />
+                                <TouchableHighlight
+                                    style={[styles.buttonBox, styles.blue]}
+                                    onPress={this._cadastrar.bind(this)}>
+                                    <Text style={styles.text}>Cadastrar</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight
+                                    style={[styles.buttonBox, styles.default]}
+                                    onPress={() => {
+                                        this.setModalVisibleRegister(false)
+                                    }}>
+                                    <Text style={styles.text}>Cancelar</Text>
+                                </TouchableHighlight>
+
+
+
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
                 <Image source={require('../logo.png')} />
                 <TouchableHighlight
                     style={this.state.pressEntrarStatus ? [styles.button, styles.redPress] : [styles.button, styles.red]}
@@ -133,7 +264,7 @@ export default class Login extends React.Component {
                     onShowUnderlay={this._onShowUnderlayRegister.bind(this)}
                     onPress={this._onShowUnderlayRegister.bind(this)}
                     onLongPress={this._onShowUnderlayRegister.bind(this)}>
-                    <Text style={styles.text}>Registrar</Text>
+                    <Text style={styles.text}>Cadastrar</Text>
                 </TouchableHighlight>
             </View>
         );
